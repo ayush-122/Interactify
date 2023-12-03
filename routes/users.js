@@ -4,8 +4,11 @@ const router =express.Router();
 
 const usersController = require('../controllers/users_controller');
 
-router.get('/profile',usersController.profile);
+const postController =require('../controllers/post_controller');
 
-console.log('I am in the user.js routes');
+router.get('/profile',usersController.profile);
+router.get('/profilelink',usersController.profilelink);
+
+router.get('/post' ,postController.post );
 
 module.exports =router;

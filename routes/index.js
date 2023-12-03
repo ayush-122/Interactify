@@ -4,10 +4,11 @@ const router = express.Router();
 
 const homeController =require('../controllers/home_controller');
 
-router.get('/',homeController.home);
+router.get('/', homeController.home);
+router.get('/navigation', homeController.navigation);
 
-console.log(' I am using now users routes');
 router.use('/users',require('./users'));
+
 
 
 
