@@ -98,6 +98,6 @@ module.exports.create_session = async function (req, res) {
         onsole.error('Error during sign-in');
         return res.status(500).send('Internal server error');
     }
-
-    //handle user not found 
+    
+ 
 }
