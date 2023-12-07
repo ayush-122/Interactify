@@ -76,28 +76,5 @@ module.exports.create = async function (req, res) {
 //sign in and create user session
 module.exports.create_session = async function (req, res) {
     //Todo list
-    //find the user
-    try {
-        const user = await User.findOne({ email: req.body.email });
-        //handle user found
-        if (user) {
-            //handle password which does not matach
-            if (user.password != req.body.password) {
-                return res.redirect('back');
-            }
-            //handle session creation
-            res.cookie('user_id', user._id);
-            return res.redirect('/users/profile');
-        }
-
-        else {
-            return res.redirect('back');
-        }
-    }
-    catch (error) {
-        onsole.error('Error during sign-in');
-        return res.status(500).send('Internal server error');
-    }
-
-    //handle user not found 
+    
 }
