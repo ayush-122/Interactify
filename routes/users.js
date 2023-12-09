@@ -1,4 +1,5 @@
 const express =require('express');
+const passport =require('passport');
 
 const router =express.Router();
 
@@ -16,7 +17,12 @@ router.get('/post' ,postController.post );
 
 router.post('/create' ,usersController.create);
 
-router.post('/create-session',usersController.create_session);
+//it will take three arugment 2nd one will be middleware
+//use passport as a middleware to autheticate
+router.post('/create-session',passport.authenticate(
+   'local',{failureRedirect:'/users/sign-in'} 
+)
+,usersController.create_session);
 
 router.post('/profile/sign-out' , usersController.signOut);
 

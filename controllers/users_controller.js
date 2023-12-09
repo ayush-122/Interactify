@@ -76,5 +76,6 @@ module.exports.create = async function (req, res) {
 //sign in and create user session
 module.exports.create_session = async function (req, res) {
     //Todo list
+    return res.redirect('/');
     
 }
