@@ -10,6 +10,25 @@ const db =require('./config/mongoose');
 const session =require('express-session');
 const passport =require('passport');
 const passportLocal =require('./config/passport-local-strategy');
+// const MongoStore= require('connect-mongo');
+// const mongoStore= require('connect-mongo')(session);
+
+const MongoStore = require('connect-mongo');
+
+const sassMiddleWare= require('node-sass-middleware');
+
+
+app.use(sassMiddleWare({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug:true,
+    outputStyle:'expanded',
+    prefix:'/css'
+
+
+}));
+
+
 
 app.use(express.static('./assets'));
 app.use(expresslayouts);
@@ -25,17 +44,57 @@ app.set('layout extractScripts', true);
 app.set('view engine' , 'ejs');
 app.set('views', './views');
 
+
+//mongo store is used to stored the session-cookies in the db
+
 app.use(session({
- name:'codeial',
- //TODO change he scret before deployment in production mode
- secret:'blahsomething',
- saveUninitialized:false,
- resave:false,
- cookie:{maxAge:(1000*60*100)}
-}));
+        name: 'codeial',
+        // TODO change the secret before deployment in production mode
+        secret: 'blahblah',
+        saveUninitialized: false,
+        resave: false,
+        cookie: {
+            maxAge: (1000 * 60 * 100)
+        },
+        store:  MongoStore.create(
+            {
+                client: db.getClient(),
+                autoRemove: 'disabled'
+            },function(err){
+                console.log(err||'cannot stablish the connection ok.!!!')
+            }
+        )
+    }));
+
+
+// app.use(session({
+//  name:'codeial',
+//  //TODO change he scret before deployment in production mode
+//  secret:'blahsomething',
+//  saveUninitialized:false,
+//  resave:false,
+//  cookie:{
+//     maxAge:(1000*60*100)
+// },
+// // store: MongoStore.create({
+// //     mongoUrl:'mongodb://localhost/codeial_development',
+// //     autoRemove: 'disabled',
+// //   })
+// store:new mongoStore({
+//     mongooseConnection:db,
+//     autoRemove:'disabled'
+//  },
+//  function(err){
+//     console.log(err||'connect-mongodb setup is ok');
+//  }
+//  )
+
+
+// }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 //use express Router
 app.use('/' ,require('./routes'));
 

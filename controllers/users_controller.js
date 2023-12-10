@@ -1,27 +1,12 @@
 const User = require('../models/user');
 
-module.exports.profile =  async function (req, res) {
-    if (req.cookies.user_id)
-    {
-        console.log(req.cookies.user_id);
-       const user= await User.findOne({_id:req.cookies.user_id});
-       console.log(user);
-       if(user)
-       {
-        return res.render('user_profile' ,{
-            title:"User profile",
-            user:user
-        })
-       }
-       else
-       {
-        return res.redirect('back');
-       }
-    }
-    else
-    {
-        return res.redirect('/users/sign-in');
-    }
+module.exports.profile = function(req, res){
+
+    console.log('how are you');
+    console.log(res.locals.user);
+    return res.render('user_profile', {
+        title: 'User Profile'
+    })
 }
 
 // module.exports.profilelink =function(req,res)
@@ -30,11 +15,20 @@ module.exports.profile =  async function (req, res) {
 // }
 
 module.exports.signIn = function (req, res) {
+    if(req.isAuthenticated())
+      {
+        return res.redirect('/users/profile');
+      }
     return res.render('user_sign_in', {
         title: "Sign In"
     })
 }
 module.exports.signUp = function (req, res) {
+      if(req.isAuthenticated())
+      {
+        return res.redirect('/users/profile');
+      }
+
     return res.render('user_sign_up', {
         title: "Sign Up"
     })
@@ -72,10 +66,22 @@ module.exports.create = async function (req, res) {
 
 
 
-}
+} 
 //sign in and create user session
 module.exports.create_session = async function (req, res) {
     //Todo list
     return res.redirect('/');
     
+}
+
+module.exports.destroySession =function(req,res)
+{
+    req.logout(function(err){
+        if(err){
+          console.error(err);
+          return res.status(500).json({ message: 'Error logging out' });
+        }
+    });
+    console.log('cookies cleared');
+    return res.redirect('/users/sign-in');
 }
