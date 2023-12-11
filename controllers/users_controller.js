@@ -33,12 +33,6 @@ module.exports.signUp = function (req, res) {
         title: "Sign Up"
     })
 }
-module.exports.signOut =function(req,res)
-{
-    res.clearCookie('user_id');
-    console.log('cookies cleared');
-    return res.redirect('/users/sign-in');
-}
 
 module.exports.create = async function (req, res) {
     //TODO list

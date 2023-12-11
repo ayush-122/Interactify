@@ -1,4 +1,20 @@
-module.exports.post =function (req,res)
+const Post =require('../models/post');
+
+module.exports.create= async function(req,res)
 {
-    return res.end('<h1> All your posts is here</h1>');
+    try
+    {
+ const post=  await Post.create({
+    content:req.body.content,
+    user:req.user._id
+
+    });
+    return res.redirect('back');
+}
+catch(error)
+{
+    console.log('error in creating posts');
+    return res.redirect('back');
+}
+
 }

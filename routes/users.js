@@ -13,7 +13,7 @@ router.get('/profile', passport.checkAuthentication,usersController.profile);
 router.get('/sign-up', usersController.signUp);
 
 router.get('/sign-in', usersController.signIn);
-router.get('/post' ,postController.post );
+// router.get('/post' ,postController.post );
 
 router.post('/create' ,usersController.create);
 
