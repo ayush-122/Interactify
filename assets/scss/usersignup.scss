@@ -1,0 +1,55 @@
+// Adding transform: translate(-50%, -50%) helps adjust the position of the element after the top and left properties have been set. It effectively shifts the element back by half of its own width and half of its own height.
+
+// Here's why this combination is useful:
+
+// Centering Along the Horizontal Axis (left: 50%):
+
+// left: 50% positions the left edge of the element at the middle of its containing element.
+// Centering Along the Vertical Axis (top: 50%):
+
+// top: 50% positions the top edge of the element at the middle of its containing element.
+// Adjustment for Element Dimensions (transform: translate(-50%, -50%)):
+
+// The transform property, specifically translate(-50%, -50%), shifts the element back by half of its own width and half of its own height.
+// This adjustment ensures that the center point of the element aligns with the center point of its containing element, effectively centering the entire element.
+.form-box
+{
+    width:90%;
+    max-width:450px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background-color: #333;
+    padding:50px 60px 70px;
+    text-align: center;
+    border-radius: 60px;
+
+    h1{
+        font-size:30px;
+        margin-bottom: 50px;
+        color:white;
+        position: relative;
+    }
+}
+
+.input-field
+{
+    display: flex;
+    margin:10px 10px;
+
+    border-radius: 5px;
+    background-color: #2b2b2b;
+    color: whitesmoke;
+    align-items: center;
+
+    input{
+        width:100%;
+        border:0;
+        outline:0;
+        background-color: transparent;
+        padding:18px 12px;
+         font-size: 16px;
+         color: white;
+    }
+}

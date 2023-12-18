@@ -1,0 +1,16 @@
+<li>
+    <p>
+      <% if((locals.user) && ((locals.user.id ==comment.user.id)|| locals.user.id==post.user.id))
+      {console.log("I am printing in comment.ejs");
+        console.log(locals.user.id);
+        console.log(post.user);
+        %>
+        <a href="/comments/destroy/<%= comment.id %>"><i class="fa-solid fa-delete-left" style="color: #8b0909;"></i></a>
+      <%}%>
+      <%= comment.content %>
+        <br>
+        <small>
+          <%= comment.user ? comment.user.name : 'User not available' %>
+        </small>
+    </p>
+  </li>

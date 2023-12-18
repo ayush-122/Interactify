@@ -3,7 +3,7 @@
 <h2>Interactify</h2>
 <ul id="list">
    <li><% if(locals.user){ %>
-    <a href="/users/profile"><%= user.name %></a>
+    <a href="/users/profile/<%= user.id%>"><%= user.name %></a>
     <li>
         <a href="/users/sign-out">Sign Out</a>
     </li>
