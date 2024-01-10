@@ -1,6 +1,6 @@
 const mongoose =require('mongoose');
 
-mongoose.connect('mongodb://localhost/codeial_development');
+mongoose.connect('mongodb+srv://ayushsingh4045:DeXlSENxzhapXyO8@cluster0.ji0rway.mongodb.net/Interactify?retryWrites=true&w=majority');
 
 const db =mongoose.connection;
 
